@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function listen() {
+                let btnElements = document.querySelectorAll('.multiple');
+                let submitBtnElement = document.querySelector('#confirm-btn');
+                for (let btnElement of btnElements) {
+                    btnElement.addEventListener('click', event => multipleChoice(event));
+                }
+                submitBtnElement.addEventListener('click', freeResponse)
+            })
+
+            function multipleChoice(event){
+                const currentBtnElement = event.target;
+                let newH4Element = document.createElement('h4');
+
+                if (currentBtnElement.classList.contains('Correct')) {
+                    currentBtnElement.style.background = 'green';
+                    newH4Element.textContent = 'Correct!';
+                }
+                else {
+                    currentBtnElement.style.background = 'red';
+                    newH4Element.textContent = 'Incorrect';
+                }
+
+                let divElement = currentBtnElement.parentElement;
+                divElement.appendChild(newH4Element);
+
+            }
+
+            function freeResponse(){
+                let answerInputElement = document.querySelector('#free-response');
+                let answer = answerInputElement.value;
+                let newH4Element = document.createElement('h4');
+
+                if (answer == 'Oxygen') {
+                    answerInputElement.style.background = 'green';
+                    newH4Element.textContent = 'Correct!';
+                }
+                else{
+                    answerInputElement.style.background = 'red';
+                    newH4Element.textContent = 'Incorrect';
+                }
+                let divElement = answerInputElement.parentElement;
+                divElement.appendChild(newH4Element);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>What is the opposite of matter?</h3>>
+                <button class="multiple Incorrect">Normal Matter</button>
+                <button class="multiple Incorrect">Dark Matter</button>
+                <button class="multiple Incorrect">Solid Matter</button>
+                <button class="multiple Incorrect">Liquid Matter</button>
+                <button class="multiple Correct">Antimatter</button>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>What element did Joseph Priestly discover in 1774?</h3>
+                <h5 id="tip"><i>Case sensitive</i></h5>
+                <input id="free-response" type=""text" placeholder="Type your answer...">
+                <button id="confirm-btn">Submit Answer</button>
+            </div>
+        </div>
+    </body>
+</html>
